@@ -29,7 +29,7 @@ router.get('/id/:id', async (req, res) => {
 	}
 });
 
-router.get('name/:name', async (req, res) => {
+router.get('/name/:name', async (req, res) => {
 	const {name} = req.params;
 	try {
 		const productByName = await Product.find({ name });
@@ -39,7 +39,7 @@ router.get('name/:name', async (req, res) => {
 	}
 });
 
-router.get('category/:category', async (req, res) => {
+router.get('/category/:category', async (req, res) => {
 	const {category} = req.params;
 
 	try {
@@ -50,7 +50,7 @@ router.get('category/:category', async (req, res) => {
 	}
 });
 
-router.get('price/:price', async (req, res) => {
+router.get('/price/:price', async (req, res) => {
 	const {price} = req.params;
 
 	try {
@@ -60,5 +60,29 @@ router.get('price/:price', async (req, res) => {
 		return res.status(500).json(err);
 	}
 });
+
+
+router.post('', async (req, res, next)=>{
+	try{
+		const product = new Product(req.body);
+
+		await product.save();
+		return res.status(201).json(product);
+	}catch(err){
+		return res.status(500).json(err);
+	}
+})
+
+router.put('/id/:id', async (req, res,next)=>{
+	const product = new Product(req.body);
+	const {id} = req.params; 
+	product._id = id;
+	try{
+		await Product.findByIdAndUpdate(id, product);
+		return res.status(200).json(product);
+	}catch(err){
+		return res.status(500).json(err);
+	}
+})
 
 module.exports=router

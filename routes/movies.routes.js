@@ -29,7 +29,7 @@ router.get('/id/:id', async (req, res) => {
 	}
 });
 
-router.get('title/:title', async (req, res) => {
+router.get('/title/:title', async (req, res) => {
 	const {title} = req.params;
 	try {
 		const movieByTitle = await Movie.find({ title });
@@ -39,7 +39,7 @@ router.get('title/:title', async (req, res) => {
 	}
 });
 
-router.get('genre/:genre', async (req, res) => {
+router.get('/genre/:genre', async (req, res) => {
 	const {genre} = req.params;
 
 	try {
@@ -50,7 +50,7 @@ router.get('genre/:genre', async (req, res) => {
 	}
 });
 
-router.get('year/:year', async (req, res) => {
+router.get('/year/:year', async (req, res) => {
 	const {year} = req.params;
 
 	try {
